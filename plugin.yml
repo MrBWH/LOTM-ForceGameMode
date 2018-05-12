@@ -1,0 +1,30 @@
+name: LOTM-ForceGameMode
+main: lotmfgm.ForceGamemode
+version: 1.2
+author: brentdynamics
+description: Forces a specific GameMode to a player upon join now updated to support spectator
+
+commands:
+  fgm:
+    description: Prefix for all commands for ForceGamemode
+    usage: /<command>
+  forcegamemode:
+    description: Prefix for all commands for ForceGamemode
+    usage: /<command>
+    
+permissions:
+  forcegamemode.admin:
+    description: Access to all of the commands
+    default: op
+  forcegamemode.gamemode.survival:
+    description: Forces gamemode into survival
+    default: false
+  forcegamemode.gamemode.creative:
+    description: Forces gamemode into creative
+    default: false
+  forcegamemode.gamemode.adventure:
+    description: Forces gamemode into adventure
+    default: false
+  forecgamemode.gamemode.spectator:
+    description: Forces gamemode into spectator
+    default: false

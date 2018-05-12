@@ -1,0 +1,6 @@
+# GamemodeAll: Forces the specified gamemode for all players.
+# SendCommand: If true, sends a command on player join.
+# Command: The command to be sent if SendCommand is true.
+GamemodeAll: none
+SendCommand: false
+Command: 
