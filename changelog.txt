@@ -1,0 +1,6 @@
+Force Game Mode v1.3.1
+
+ * Force Game Mode now changes game mode for player at join when the player has forcegamemode.gamemode.? Permission  
+ * Updated Text for when the commands /fgm or /forcegamemode are issued with out any conditions. 
+ * Updated Text for when the commands fgm or forcegamemode are issued from console and do not have condistions
+ * Updated Messages sent to player when gamemode is set by the plugin.  

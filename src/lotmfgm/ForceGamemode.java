@@ -65,7 +65,7 @@ public class ForceGamemode extends JavaPlugin {
 
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if ((sender instanceof Player)) {
-			if (cmd.getName().equalsIgnoreCase("fgm")) {
+			if (cmd.getName().equalsIgnoreCase("fgm") || (cmd.getName().equalsIgnoreCase("forcegamemode"))) {
 				Player p = (Player) sender;
 				if (p.hasPermission("forcegamemode.admin")) {
 					if (args.length > 0) {
@@ -111,65 +111,25 @@ public class ForceGamemode extends JavaPlugin {
 							}
 						}
 					} else {
-						p.sendMessage("Coming soon... help page!");
+						p.sendMessage("[ForceGameMode] Help:");
+						p.sendMessage(ChatColor.YELLOW + "Commands are /fgm or /forcegamemode");
+						p.sendMessage(ChatColor.LIGHT_PURPLE + "Availabe gamemode Options are: survival, creative, adventure and spectator or use ther number 0,1,2,3");
+						p.sendMessage(ChatColor.YELLOW + "/fgm <player> <gamemode>");
+						p.sendMessage(ChatColor.YELLOW + "Too remove player /fgm remove <player>");
+						p.sendMessage(ChatColor.GREEN + "Permissions will overide commands!!!");
 					}
 				} else {
-					p.sendMessage(ChatColor.RED + "You do not have permission");
+					p.sendMessage(ChatColor.RED + "Sorry you do not have permission");
 				}
-			} else if (cmd.getName().equalsIgnoreCase("forcegamemode")) {
-				Player p = (Player) sender;
-				if (p.hasPermission("forcegamemode.admin")) {
-					if (args.length > 0) {
-						if (args[0].equalsIgnoreCase("add")) {
-							if (args.length > 1) {
-								String pname = args[1];
-								if (args.length > 2) {
-									String gamemode = args[2];
-									if ((gamemode.equalsIgnoreCase("survival")) 
-											|| (gamemode.equalsIgnoreCase("0"))
-											|| (gamemode.equalsIgnoreCase("s"))
-											|| (gamemode.equalsIgnoreCase("creative"))
-											|| (gamemode.equalsIgnoreCase("1")) 
-											|| (gamemode.equalsIgnoreCase("c"))
-											|| (gamemode.equalsIgnoreCase("adventure"))
-											|| (gamemode.equalsIgnoreCase("2")) 
-											|| (gamemode.equalsIgnoreCase("a"))
-											|| (gamemode.equalsIgnoreCase("spectator"))
-											|| (gamemode.equalsIgnoreCase("3"))) {
-										getDatabaseConfig().set(pname, null);
-										getDatabaseConfig().set(pname + ".Gamemode", gamemode);
-										saveDatabaseConfig();
-										p.sendMessage(ChatColor.RED + "[ForceGameMode] Player added.");
-									} else {
-										p.sendMessage(ChatColor.RED + "[ForceGameMode] Please use a correct gamemode.");
-									}
-								} else {
-									p.sendMessage(ChatColor.RED + "[ForceGameMode] Please enter a gamemode to force.");
-								}
-							} else {
-								p.sendMessage(ChatColor.RED
-										+ "[ForceGameMode] Please enter a player name to add to the database");
-							}
-						} else if (args[0].equalsIgnoreCase("remove")) {
-							if (args.length > 1) {
-								String pname = args[1];
-								getDatabaseConfig().set(pname + ".Gamemode", "none");
-								saveDatabaseConfig();
-								p.sendMessage(ChatColor.RED + "[ForceGameMode] Player removed.");
-							} else {
-								p.sendMessage(ChatColor.RED + "[ForceGameMode] Please enter a name to be removed.");
-							}
-						}
-					} else {
-						p.sendMessage("Coming soon... help page!");
-					}
-				} else {
-					p.sendMessage(ChatColor.RED + "You do not have permission");
-				}
-
-			}
+			} 
 		} else {
-			sender.sendMessage("Coming soon... Console Commands");
+			sender.sendMessage("[ForceGameMode] Help:");
+			sender.sendMessage("Commands are: fgm or forcegamemode");
+			sender.sendMessage("Availabe gamemode Options are: survival, creative, adventure and spectator or use ther number 0,1,2,3");
+			sender.sendMessage("fmg <player> <gamemode>");
+			sender.sendMessage("remove player form forced gamemode: fmg remove <player>");
+			sender.sendMessage("Note: Permissions will overide commands");
+			sender.sendMessage("Permissions: forcegamemode.gamemode.survival, forcegamemode.gamemode.creative, forcegamemode.gamemode.adventure, forcegamemode.gamemode.spectator");
 		}
 		return true;
 	}

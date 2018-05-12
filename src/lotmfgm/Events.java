@@ -24,25 +24,27 @@ public class Events implements Listener {
 					|| (gamemode.equalsIgnoreCase("s"))) {
 				if (p.getGameMode() != GameMode.SURVIVAL) {
 					p.setGameMode(GameMode.SURVIVAL);
-					p.sendMessage(ChatColor.RED + "[ForceGameMode] You have been set back to SURVIVAL.");
+					p.sendMessage(ChatColor.RED + "[ForceGameMode] Gamemode Set to SURVIVAL.");
 				}
 			} else if ((gamemode.equalsIgnoreCase("creative")) 
 					|| (gamemode.equalsIgnoreCase("1"))
 					|| (gamemode.equalsIgnoreCase("c"))) {
 				if (p.getGameMode() != GameMode.CREATIVE) {
 					p.setGameMode(GameMode.CREATIVE);
-					p.sendMessage(ChatColor.RED + "[ForceGameMode] You have been set back to CREATIVE.");
+					p.sendMessage(ChatColor.RED + "[ForceGameMode] Gamemode Set to CREATIVE.");
 				}
 			} else if (((gamemode.equalsIgnoreCase("adventure")) 
 					|| (gamemode.equalsIgnoreCase("2"))
-					|| (gamemode.equalsIgnoreCase("a"))) && (p.getGameMode() != GameMode.ADVENTURE)) {
+					|| (gamemode.equalsIgnoreCase("a"))) 
+					&& (p.getGameMode() != GameMode.ADVENTURE)) {
 				p.setGameMode(GameMode.ADVENTURE);
-				p.sendMessage(ChatColor.RED + "[ForceGameMode] You have been set back to ADVENTURE");
+				p.sendMessage(ChatColor.RED + "[ForceGameMode] Gamemode Set to ADVENTURE");
 			} else if (((gamemode.equalsIgnoreCase("spectator"))
 					|| (gamemode.equalsIgnoreCase("3"))
-					|| (gamemode.equalsIgnoreCase("spectate"))) && (p.getGameMode() != GameMode.SPECTATOR)) {
+					|| (gamemode.equalsIgnoreCase("spectate"))) 
+					&& (p.getGameMode() != GameMode.SPECTATOR)) {
 				p.setGameMode(GameMode.SPECTATOR);
-				p.sendMessage(ChatColor.RED + "[ForceGameMode] Your have been set back to SPECTATOR");
+				p.sendMessage(ChatColor.RED + "[ForceGameMode] Gamemode set to SPECTATOR");
 			}
 		} else if (plugin.getDatabaseConfig().contains(p.getName())) {
 			String gamemode = plugin.getDatabaseConfig().getString(p.getName() + ".Gamemode");
@@ -51,27 +53,36 @@ public class Events implements Listener {
 					|| (gamemode.equalsIgnoreCase("s"))) {
 				if (p.getGameMode() != GameMode.SURVIVAL) {
 					p.setGameMode(GameMode.SURVIVAL);
-					p.sendMessage(ChatColor.RED + "[ForceGameMode] You have been set back to SURVIVAL.");
+					p.sendMessage(ChatColor.RED + "[ForceGameMode] Gamemode Set to SURVIVAL.");
 				}
 			} else if ((gamemode.equalsIgnoreCase("creative")) 
 					|| (gamemode.equalsIgnoreCase("1"))
 					|| (gamemode.equalsIgnoreCase("c"))) {
 				if (p.getGameMode() != GameMode.CREATIVE) {
 					p.setGameMode(GameMode.CREATIVE);
-					p.sendMessage(ChatColor.RED + "[ForceGameMode] You have been set back to CREATIVE.");
+					p.sendMessage(ChatColor.RED + "[ForceGameMode] Gamemode Set to CREATIVE.");
 				}
 			} else if (((gamemode.equalsIgnoreCase("adventure")) 
 					|| (gamemode.equalsIgnoreCase("2"))
-					|| (gamemode.equalsIgnoreCase("a"))) && (p.getGameMode() != GameMode.ADVENTURE)) {
+					|| (gamemode.equalsIgnoreCase("a"))) 
+					&& (p.getGameMode() != GameMode.ADVENTURE)) {
 				p.setGameMode(GameMode.ADVENTURE);
-				p.sendMessage(ChatColor.RED + "[ForceGameMode] You have been set back to ADVENTURE");
+				p.sendMessage(ChatColor.RED + "[ForceGameMode] Gamemode Set to ADVENTURE");
 			} else if (((gamemode.equalsIgnoreCase("spectator"))
 					|| (gamemode.equalsIgnoreCase("3"))
-					|| (gamemode.equalsIgnoreCase("spectate"))) && (p.getGameMode() != GameMode.SPECTATOR)) {
+					|| (gamemode.equalsIgnoreCase("spectate"))) 
+					&& (p.getGameMode() != GameMode.SPECTATOR)) {
 				p.setGameMode(GameMode.SPECTATOR);
-				p.sendMessage(ChatColor.RED + "[ForceGameMode] Your have been set back to SPECTATOR");
+				p.sendMessage(ChatColor.RED + "[ForceGameMode] Gamemode Set to SPECTATOR");
 			}
-		} else if (p.hasPermission("forcegamemode.gamemode.survival")) {
+		}
+	}
+
+
+	@EventHandler
+	public void onPlayerJoin(PlayerJoinEvent e) {
+		Player p = e.getPlayer();
+		if (p.hasPermission("forcegamemode.gamemode.survival")) {
 			if (p.getGameMode() != GameMode.SURVIVAL) {
 				p.setGameMode(GameMode.SURVIVAL);
 				p.sendMessage(ChatColor.RED + "You have been set to SURVIVAL");
@@ -88,11 +99,6 @@ public class Events implements Listener {
 			p.setGameMode(GameMode.SPECTATOR);
 			p.sendMessage(ChatColor.RED + "You have been set to Spectator");
 		}
-	}
-
-	@EventHandler
-	public void onPlayerJoin(PlayerJoinEvent e) {
-		Player p = e.getPlayer();
 		if (plugin.getConfig().getBoolean("SendCommand")) {
 			if (!plugin.getConfig().getString("Command").equals(null)) {
 				String command = plugin.getConfig().getString("Command");
