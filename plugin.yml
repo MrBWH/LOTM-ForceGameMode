@@ -1,6 +1,6 @@
 name: LOTM-ForceGameMode
 main: lotmfgm.ForceGamemode
-version: 1.4.4
+version: 1.4.b4
 author: brentdynamics
 description: Forces a specific GameMode to a player upon join now updated to support spectator
 
