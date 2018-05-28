@@ -1,6 +1,26 @@
 # GamemodeAll: Forces the specified gamemode for all players.
+
+GamemodeAll: none
+
 # SendCommand: If true, sends a command on player join.
 # Command: The command to be sent if SendCommand is true.
-GamemodeAll: none
+
 SendCommand: false
 Command: 
+
+# Force on Posible Options are 'join' 'move' or 'both'
+# When ForceOn is set to 'join' fgm will change the game mode at time of player join
+# When ForceOn is set to 'move' fgm will change the game mode after the player moves
+# When ForceOn is set to 'both' fgm will change the game mode at join or on player move.  
+
+ForceOn: join
+
+# Meesages Section 
+# This is where you can configure your own custom messages and use & for colour codes
+
+Messages:
+  FroceSurvival: '&c[Force Game Mode] &6 Game Mode Froced &8 Survival!'
+  ForceCreative: '&c[Force Game Mode] &6 Game Mode Froced &8 Creative!'
+  ForceAdventure: '&c[Force Game Mode] &6 Game Mode Froced &8 Adventure!'
+  ForceSpectator: '&c[Force Game Mode] &6 Game Mode Froced &8 Spectator!'
+  NoPermission: '&c[Force Game Mode] &6 Sorry you do not have &8 Permission!'

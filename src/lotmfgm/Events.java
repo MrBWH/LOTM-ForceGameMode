@@ -15,89 +15,108 @@ public class Events implements Listener {
 		plugin = instance;
 	}
 
+	public void doForceAll (Player p) {
+		if (!plugin.getConfig().getString("GamemodeAll").contains("none")) {
+			String gamemode = plugin.getConfig().getString("GamemodeAll");
+			if ((gamemode.equalsIgnoreCase("survival"))
+					|| (gamemode.equalsIgnoreCase("0"))) {
+				if (p.getGameMode() != GameMode.SURVIVAL) {
+					p.setGameMode(GameMode.SURVIVAL);
+					p.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.ForceSurvival")));
+				}
+			} else if ((gamemode.equalsIgnoreCase("creative")) 
+					|| (gamemode.equalsIgnoreCase("1"))) {
+				if (p.getGameMode() != GameMode.CREATIVE) {
+					p.setGameMode(GameMode.CREATIVE);
+					p.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.ForceCreative")));
+				}
+			} else if (((gamemode.equalsIgnoreCase("adventure")) 
+					|| (gamemode.equalsIgnoreCase("2"))) 
+					&& (p.getGameMode() != GameMode.ADVENTURE)) {
+				p.setGameMode(GameMode.ADVENTURE);
+				p.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.ForceAdventure")));
+			} else if (((gamemode.equalsIgnoreCase("spectator"))
+					|| (gamemode.equalsIgnoreCase("3"))
+					|| (gamemode.equalsIgnoreCase("spectate"))) 
+					&& (p.getGameMode() != GameMode.SPECTATOR)) {
+				p.setGameMode(GameMode.SPECTATOR);
+				p.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.ForceSpectator")));
+			}
+		}
+	}
+	
+	public void doFGMDatabase (Player p) {
+		// This class will be called if we called by either onPlayerMove or onPlayerJoin
+    if (plugin.getDatabaseConfig().contains(p.getUniqueId().toString())) {
+			String gamemode = plugin.getDatabaseConfig().getString(p.getUniqueId().toString() + ".Gamemode");
+			if ((gamemode.equalsIgnoreCase("survival")) 
+					|| (gamemode.equalsIgnoreCase("0"))) {
+				if (p.getGameMode() != GameMode.SURVIVAL) {
+					p.setGameMode(GameMode.SURVIVAL);
+					p.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.ForceSurvival")));
+				}
+			} else if ((gamemode.equalsIgnoreCase("creative")) 
+					|| (gamemode.equalsIgnoreCase("1"))) {
+				if (p.getGameMode() != GameMode.CREATIVE) {
+					p.setGameMode(GameMode.CREATIVE);
+					p.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.ForceCreative")));
+				}
+			} else if (((gamemode.equalsIgnoreCase("adventure")) 
+					|| (gamemode.equalsIgnoreCase("2"))) 
+					&& (p.getGameMode() != GameMode.ADVENTURE)) {
+				p.setGameMode(GameMode.ADVENTURE);
+				p.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.ForceAdventure")));
+			} else if (((gamemode.equalsIgnoreCase("spectator"))
+					|| (gamemode.equalsIgnoreCase("3"))) 
+					&& (p.getGameMode() != GameMode.SPECTATOR)) {
+				p.setGameMode(GameMode.SPECTATOR);
+				p.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.ForceSpectator")));
+			}
+		}	
+		
+	}
+	
+	public void doFGMPerms (Player p) {
+		if (p.hasPermission("forcegamemode.gamemode.survival")) {
+			if (p.getGameMode() != GameMode.SURVIVAL) {
+				p.setGameMode(GameMode.SURVIVAL);
+				p.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.ForceSurvival")));
+			}
+		} else if (p.hasPermission("forcegamemode.gamemode.creative")) {
+			if (p.getGameMode() != GameMode.CREATIVE) {
+				p.setGameMode(GameMode.CREATIVE);
+				p.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.ForceCreative")));
+			}
+		} else if ((p.hasPermission("forcegamemode.gamemode.adventure"))
+				&& (p.getGameMode() != GameMode.ADVENTURE)) {
+			p.setGameMode(GameMode.ADVENTURE);
+			p.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.ForceAdventure")));
+		} else if ((p.hasPermission("forcegamemode.gamemode.spectator")) && (p.getGameMode() != GameMode.SPECTATOR)){
+			p.setGameMode(GameMode.SPECTATOR);
+			p.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Messages.ForceSpectator")));
+		}	
+	}
+	
 	@EventHandler
 	public void onPlayerMove(PlayerMoveEvent e) {
 		Player p = e.getPlayer();
-		if (!plugin.getConfig().getString("GamemodeAll").contains("none")) {
-			String gamemode = plugin.getConfig().getString("GamemodeAll");
-			if ((gamemode.equalsIgnoreCase("survival")) || (gamemode.equalsIgnoreCase("0"))
-					|| (gamemode.equalsIgnoreCase("s"))) {
-				if (p.getGameMode() != GameMode.SURVIVAL) {
-					p.setGameMode(GameMode.SURVIVAL);
-					p.sendMessage(ChatColor.RED + "[ForceGameMode] Gamemode Set to SURVIVAL.");
-				}
-			} else if ((gamemode.equalsIgnoreCase("creative")) 
-					|| (gamemode.equalsIgnoreCase("1"))
-					|| (gamemode.equalsIgnoreCase("c"))) {
-				if (p.getGameMode() != GameMode.CREATIVE) {
-					p.setGameMode(GameMode.CREATIVE);
-					p.sendMessage(ChatColor.RED + "[ForceGameMode] Gamemode Set to CREATIVE.");
-				}
-			} else if (((gamemode.equalsIgnoreCase("adventure")) 
-					|| (gamemode.equalsIgnoreCase("2"))
-					|| (gamemode.equalsIgnoreCase("a"))) 
-					&& (p.getGameMode() != GameMode.ADVENTURE)) {
-				p.setGameMode(GameMode.ADVENTURE);
-				p.sendMessage(ChatColor.RED + "[ForceGameMode] Gamemode Set to ADVENTURE");
-			} else if (((gamemode.equalsIgnoreCase("spectator"))
-					|| (gamemode.equalsIgnoreCase("3"))
-					|| (gamemode.equalsIgnoreCase("spectate"))) 
-					&& (p.getGameMode() != GameMode.SPECTATOR)) {
-				p.setGameMode(GameMode.SPECTATOR);
-				p.sendMessage(ChatColor.RED + "[ForceGameMode] Gamemode set to SPECTATOR");
+		if ((plugin.getConfig().getString("ForceOn").contains("move"))
+				|| (plugin.getConfig().getString("ForceOn").contains("both")))  {
+			this.doForceAll(p);
+			this.doFGMDatabase(p);
+			this.doFGMPerms(p);
 			}
-		} else if (plugin.getDatabaseConfig().contains(p.getName())) {
-			String gamemode = plugin.getDatabaseConfig().getString(p.getName() + ".Gamemode");
-			if ((gamemode.equalsIgnoreCase("survival")) 
-					|| (gamemode.equalsIgnoreCase("0"))
-					|| (gamemode.equalsIgnoreCase("s"))) {
-				if (p.getGameMode() != GameMode.SURVIVAL) {
-					p.setGameMode(GameMode.SURVIVAL);
-					p.sendMessage(ChatColor.RED + "[ForceGameMode] Gamemode Set to SURVIVAL.");
-				}
-			} else if ((gamemode.equalsIgnoreCase("creative")) 
-					|| (gamemode.equalsIgnoreCase("1"))
-					|| (gamemode.equalsIgnoreCase("c"))) {
-				if (p.getGameMode() != GameMode.CREATIVE) {
-					p.setGameMode(GameMode.CREATIVE);
-					p.sendMessage(ChatColor.RED + "[ForceGameMode] Gamemode Set to CREATIVE.");
-				}
-			} else if (((gamemode.equalsIgnoreCase("adventure")) 
-					|| (gamemode.equalsIgnoreCase("2"))
-					|| (gamemode.equalsIgnoreCase("a"))) 
-					&& (p.getGameMode() != GameMode.ADVENTURE)) {
-				p.setGameMode(GameMode.ADVENTURE);
-				p.sendMessage(ChatColor.RED + "[ForceGameMode] Gamemode Set to ADVENTURE");
-			} else if (((gamemode.equalsIgnoreCase("spectator"))
-					|| (gamemode.equalsIgnoreCase("3"))
-					|| (gamemode.equalsIgnoreCase("spectate"))) 
-					&& (p.getGameMode() != GameMode.SPECTATOR)) {
-				p.setGameMode(GameMode.SPECTATOR);
-				p.sendMessage(ChatColor.RED + "[ForceGameMode] Gamemode Set to SPECTATOR");
-			}
-		}
 	}
 
 
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent e) {
 		Player p = e.getPlayer();
-		if (p.hasPermission("forcegamemode.gamemode.survival")) {
-			if (p.getGameMode() != GameMode.SURVIVAL) {
-				p.setGameMode(GameMode.SURVIVAL);
-				p.sendMessage(ChatColor.RED + "You have been set to SURVIVAL");
-			}
-		} else if (p.hasPermission("forcegamemode.gamemode.creative")) {
-			if (p.getGameMode() != GameMode.CREATIVE) {
-				p.setGameMode(GameMode.CREATIVE);
-				p.sendMessage(ChatColor.RED + "You have been set to CREATIVE");
-			}
-		} else if ((p.hasPermission("forcegamemode.gamemode.adventure")) && (p.getGameMode() != GameMode.ADVENTURE)) {
-			p.setGameMode(GameMode.ADVENTURE);
-			p.sendMessage(ChatColor.RED + "You have been set to ADVENTURE");
-		} else if ((p.hasPermission("forcegamemode.gamemode.spectator")) && (p.getGameMode() != GameMode.SPECTATOR)){
-			p.setGameMode(GameMode.SPECTATOR);
-			p.sendMessage(ChatColor.RED + "You have been set to Spectator");
+		if ((plugin.getConfig().getString("ForceOn").contains("join")) 
+			||	(plugin.getConfig().getString("ForceOn").contains("both"))) {
+			this.doForceAll(p);
+			this.doFGMDatabase(p);
+			this.doFGMPerms(p);
 		}
 		if (plugin.getConfig().getBoolean("SendCommand")) {
 			if (!plugin.getConfig().getString("Command").equals(null)) {

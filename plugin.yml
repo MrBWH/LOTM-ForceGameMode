@@ -1,16 +1,16 @@
 name: LOTM-ForceGameMode
 main: lotmfgm.ForceGamemode
-version: 1.3.1
+version: 1.4.4
 author: brentdynamics
 description: Forces a specific GameMode to a player upon join now updated to support spectator
 
 commands:
   fgm:
     description: Prefix for all commands for ForceGamemode
-    usage: /<command>
+    usage: /<command> add|remove player (gamemode)
   forcegamemode:
     description: Prefix for all commands for ForceGamemode
-    usage: /<command>
+    usage: /<command> add|remove player (gamemode)
     
 permissions:
   forcegamemode.admin:
